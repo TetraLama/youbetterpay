@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+
+{% if bank is defined %}
+<h3>Edit Bank</h3>
+{% else %}
+<h3>Add Bank</h3>
+{% endif %}
+<hr />
+
+<form action="{{ request.path }}" method="post">
+  <label class="form-label" for=" name">Bank Name</label><br>
+  {% if bank is defined %}
+  <input class="form-control" type="text" name="name" placeholder="{{ bank.name }}" /><br>
+  {% else %}
+  <input class="form-control" type="text" name="name" placeholder="Bank Name" /><br>
+  {% endif %}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

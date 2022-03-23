@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+
+{% if transaction_type is defined %}
+<h3>Edit Transaction Type</h3>
+{% else %}
+<h3>Add Transaction Type</h3>
+{% endif %}
+<hr />
+
+<form action="{{ request.path }}" method="post">
+  <label class="form-label" for=" name">Transaction Type name</label><br>
+  {% if transaction_type is defined %}
+  <input class="form-control" type="text" name="name" placeholder="{{ transaction_type.name }}" /><br>
+  {% else %}
+  <input class="form-control" type="text" name="name" placeholder="Transaction Type name" /><br>
+  {% endif %}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
