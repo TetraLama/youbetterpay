@@ -1,0 +1,9 @@
+python-dotenv
+motor
+typing
+fastapi
+uvicorn
+pymongo
+pymongo[srv]
+pydantic
+requests

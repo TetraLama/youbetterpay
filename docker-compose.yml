@@ -1,0 +1,60 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mongo
+    env_file:
+      - ./.env
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - "mongodb-data:/data/db"
+
+  mongo-express:
+    image: mongo-express
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "${DB_USERNAME}"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "${DB_PASSWORD}"
+      ME_CONFIG_MONGODB_URL: "mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/"
+
+  web:
+    build: 
+      context: web
+      args:
+        WORKDIR: "${CONTAINER_PARENT_WORKDIR}/web"
+    image: youbetterpay-web
+    container_name: youbetterpay-web
+    ports: 
+      - "8080:5000"
+    env_file:
+      - ./.env
+    volumes:
+      - "$PWD/web:${CONTAINER_PARENT_WORKDIR}/web"
+    command: python3 -m flask run --host=0.0.0.0
+
+  api:
+    build: 
+      context: api
+      args:
+        WORKDIR: "${CONTAINER_PARENT_WORKDIR}/api"
+    image: youbetterpay-api
+    container_name: youbetterpay-api
+    ports: 
+      - "8082:80"
+    env_file:
+      - ./.env
+    volumes:
+      - "$PWD/api:${CONTAINER_PARENT_WORKDIR}/api"
+    command: python api/main.py
+
+volumes:
+  mongodb-data:
