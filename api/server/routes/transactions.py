@@ -17,11 +17,13 @@ from api.server.models.transactions import (
 
 router = APIRouter()
 
+
 @router.post("/", response_description="Transaction data added into the database")
 async def add_transaction_data(transaction: TransactionSchema = Body(...)):
     transaction = jsonable_encoder(transaction)
     new_transaction = await add_transaction(transaction)
     return ResponseModel(new_transaction, "Transaction added successfully.")
+
 
 @router.get("/", response_description="Transaction retrieved")
 async def get_transactions():
@@ -30,12 +32,14 @@ async def get_transactions():
         return ResponseModel(transactions, "Transactions data retrieved successfully")
     return ResponseModel(transactions, "Empty list returned")
 
+
 @router.get("/{id}", response_description="Transaction data retrieved")
 async def get_transaction_data(id):
     transaction = await retrieve_transaction(id)
     if transaction:
         return ResponseModel(transaction, "Transaction data retrieved successfully")
     return ErrorResponseModel("An error occurred.", 404, "Transaction doesn't exist.")
+
 
 @router.put("/{id}")
 async def update_transaction_data(id: str, req: UpdateTransactionModel = Body(...)):
@@ -52,7 +56,10 @@ async def update_transaction_data(id: str, req: UpdateTransactionModel = Body(..
         "There was an error updating the transaction data.",
     )
 
-@router.delete("/{id}", response_description="Transaction data deleted from the database")
+
+@router.delete(
+    "/{id}", response_description="Transaction data deleted from the database"
+)
 async def delete_transaction_data(id: str):
     deleted_transaction = await delete_transaction(id)
     if deleted_transaction:

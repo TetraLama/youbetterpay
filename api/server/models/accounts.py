@@ -1,26 +1,19 @@
 from typing import Optional
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
+
 
 class AccountSchema(BaseModel):
     name: str = Field(...)
 
     class Config:
-        schema_extra = {
-            "example": {
-                "name": "Bank Name"
-            }
-        }
+        schema_extra = {"example": {"name": "Bank Name"}}
 
 
 class UpdateAccountModel(BaseModel):
     name: Optional[str]
 
     class Config:
-        schema_extra = {
-            "example": {
-                "name": "Bank Name"
-            }
-        }
+        schema_extra = {"example": {"name": "Bank Name"}}
 
 
 def ResponseModel(data, message):

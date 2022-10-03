@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Type{% endblock %}
+{% block content %}
+    {% for type in types %}
+        <li><a href="/types/{{ type.id }}">{{ type.name }}</a><a href="/types/delete/{{ type.id }}""><i class="bi bi-trash"></i></a></li>
+    {% endfor %}
+    </ul>
+
+    <h1>New Type</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="type_name">Type Name</label>
+            <input type="text" name="type_name"
+            placeholder="type Name" class="form-control"
+            value="{{ request.form['type_name'] }}"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

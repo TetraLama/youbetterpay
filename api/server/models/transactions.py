@@ -1,5 +1,6 @@
 from typing import Optional
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
+
 
 class TransactionSchema(BaseModel):
     description: str = Field(...)
@@ -13,7 +14,7 @@ class TransactionSchema(BaseModel):
                 "description": "New TV",
                 "ammount": 2000.00,
                 "target_account": "Boursorama",
-                "source_account": None
+                "source_account": None,
             }
         }
 
@@ -30,7 +31,7 @@ class UpdateTransactionModel(BaseModel):
                 "description": "New TV",
                 "ammount": 2000.00,
                 "target_account": "Boursorama",
-                "source_account": None
+                "source_account": None,
             }
         }
 

@@ -25,7 +25,8 @@
 <body>
     <nav>
         <a href="{{ url_for('index') }}">Dashboard</a>
-        <a href="{{ url_for('accout_list_all') }}">Accounts</a>
+        <a href="{{ url_for('list_all_accounts') }}">Accounts</a>
+        <a href="{{ url_for('list_all_types') }}">Types</a>
     </nav>
     <hr>
     {% with messages = get_flashed_messages(with_categories=true) %}

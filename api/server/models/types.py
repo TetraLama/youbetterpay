@@ -1,21 +1,19 @@
+from typing import Optional
 from pydantic import BaseModel, Field
 
 
-class CategorySchema(BaseModel):
+class TypeSchema(BaseModel):
     name: str = Field(...)
 
     class Config:
-        schema_extra = {"example": {"name": "Internal Transfert"}}
+        schema_extra = {"example": {"name": "Category Name"}}
 
 
-class UpdateCategoryModel(BaseModel):
-    description: str = Field(...)
-    ammount: float = Field(...)
-    target_account: str = Field(...)
-    source_account: str = Field(...)
+class UpdateTypeModel(BaseModel):
+    name: Optional[str]
 
     class Config:
-        schema_extra = {"example": {"name": "Internal Transfert"}}
+        schema_extra = {"example": {"name": "Category Name"}}
 
 
 def ResponseModel(data, message):
