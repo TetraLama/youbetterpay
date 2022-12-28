@@ -34,12 +34,12 @@ services:
     image: youbetterpay-web
     container_name: youbetterpay-web
     ports: 
-      - "8080:5000"
+      - "8080:8080"
     env_file:
       - ./.env
     volumes:
       - "$PWD/web:${CONTAINER_PARENT_WORKDIR}/web"
-    command: python3 -m flask run --host=0.0.0.0
+    command: python3 -m flask run --host=0.0.0.0 --port=8080
 
   api:
     build: 
@@ -49,7 +49,7 @@ services:
     image: youbetterpay-api
     container_name: youbetterpay-api
     ports: 
-      - "8082:80"
+      - "8082:8082"
     env_file:
       - ./.env
     volumes:
