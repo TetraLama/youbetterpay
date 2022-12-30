@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from api.server.database import (
+from server.database import (
     add_category,
     delete_category,
     retrieve_category,
     retrieve_categories,
     update_category,
 )
-from api.server.models.categories import (
+from server.models.categories import (
     ErrorResponseModel,
     ResponseModel,
     CategorySchema,

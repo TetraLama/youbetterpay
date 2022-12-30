@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from api.server.database import (
+from server.database import (
     add_transaction,
     delete_transaction,
     retrieve_transaction,
     retrieve_transactions,
     update_transaction,
 )
-from api.server.models.transactions import (
+from server.models.transactions import (
     ErrorResponseModel,
     ResponseModel,
     TransactionSchema,

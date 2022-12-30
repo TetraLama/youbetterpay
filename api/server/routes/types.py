@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from api.server.database import (
+from server.database import (
     add_type,
     delete_type,
     retrieve_type,
     retrieve_types,
     update_type,
 )
-from api.server.models.types import (
+from server.models.types import (
     ErrorResponseModel,
     ResponseModel,
     TypeSchema,

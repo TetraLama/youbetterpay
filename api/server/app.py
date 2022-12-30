@@ -12,6 +12,6 @@ app.include_router(CategoriesRouter, tags=["Categories"], prefix="/v1/categories
 app.include_router(TypesRouter, tags=["Types"], prefix="/v1/types")
 
 
-@app.get("/", tags=["Root"])
+@app.get("/api/v1/healthcheck", tags=["Root"])
 async def read_root():
-    return {"message": "Welcome to this fantastic app!"}
+    return {"message": "All Good!"}
