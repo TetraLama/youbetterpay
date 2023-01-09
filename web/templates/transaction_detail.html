@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions{% endblock %}
+{% block content %}
+<ul>
+    <li>DESCRIPTION: {{ transaction.description }}</li>
+    <li>TYPE: {{ transaction.type }}</li>
+    <li>AMMOUNT: {{ transaction.ammount }}</li>
+    <li>CALCULATED {{ transaction.ammount_is_calculated }}</li>
+    <li>TARGET: {{ transaction.target_account }}</li>
+    <li>DEST: {{ transaction.dest_account }}</li>
+    <li>CATEGORY: {{ transaction.category }}</li>
+    <li>TRANSACTION DATE: {{ transaction.date }}</li>
+    <li>TRANSACTION RECCURENCY: {{ transaction.is_reccurent }}</li>
+    <li>TRANSACTION RECCURENCY FREQUENCE NUMBER: {{ transaction.frequency_every_number }}</li>
+    <li>TRANSACTION RECCURENCY FREQUENCE UNIT: {{ transaction.freccurency_every_unit }}</li>
+    <li>TRANSACTION END RECURRENCY: {{ transaction.date_end_reccurency }}</li>
+</ul>
+
+<p>
+    {{ transaction }}
+</p>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions{% endblock %}
+{% block content %}
+<table>
+    <tr>
+        <th>Description</th>
+        <th>Ammount</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Reccurency</th>
+        <th>DELETE</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td><a href="/transactions/{{ transaction.id }}">{{ transaction.description }}</a></td>
+        <td>{% if transaction.ammount_is_calculated %}
+            YES
+            {% else %}
+            {{ transaction.ammount }}
+            {% endif %}
+        </td>
+        <td>{% for type in types %}
+            {% if type.id in transaction.type %}
+            {{ type.name }}
+            {% endif %}
+            {% endfor %}
+        </td>
+        <td>{% for category in categories %}
+            {% if category.id in transaction.category %}
+            {{ category.name }}
+            {% endif %}
+            {% endfor %}</td>
+        <td>{{ transaction.date }}</td>
+        <td>{% if transaction.is_reccurent %}
+            Every {{ transaction.frequency_every_number }} {{ transaction.freccurency_every_unit }}
+            {% if transaction.date_end_reccurency %}
+            End on {{ transaction.date_end_reccurency }}
+            {% endif %}
+            {% else %}
+            None
+            {% endif %}</td>
+        <td><a href="/transactions/delete/{{ transaction.id }}""><i class=" bi bi-trash"></i></a></td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+
+
+<h1>New transaction</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="Description" class="form-control"
+            value="{{ request.form['description'] }}"></input>
+        <br />
+
+        <h3>Type</h3>
+        {% for type in types %}
+        <input type="radio" id="{{ type.id }}" name="type" value="{{ type.id }}">
+        <label for="type">{{ type.name }}</label><br>
+        {% endfor %}
+        <br />
+
+        <h3>AMMOUNT</h3>
+        <input type="checkbox" name="ammount_is_calculated" value="True">
+        <label for="ammount_is_calculated">Does the ammount should be calculated ?</label><br>
+
+        <label for="ammount">Ammount</label>
+        <input type="number" name="ammount" placeholder="Price" class="form-control"
+            value="{{ request.form['ammount'] }}"></input>
+        <br />
+
+        <label for="date">Transaction Date</label>
+        <input type="date" name="date">
+        <br />
+
+        <h3>Reccurrency</h3>
+        <input type="checkbox" name="is_reccurent" value="True">
+        <label for="is_reccurent">Does the transaction is reccurent ?</label><br />
+
+        Every:<br />
+        <label for="frequency_every_number"></label>
+        <input type="number" name="frequency_every_number" class="form-control"
+            value="{{ request.form['frequency_every_number'] }}"></input>
+        <br />
+        <!-- Frequency -->
+        <input type="radio" name="freccurency_every_unit" value="week">
+        <label for="freccurency_every_unit">Week</label><br>
+        <input type="radio" name="freccurency_every_unit" value="month">
+        <label for="freccurency_every_unit">Month</label><br>
+        <input type="radio" name="freccurency_every_unit" value="year">
+        <label for="freccurency_every_unit">Year</label><br>
+
+        <label for="date_end_reccurency">Last Transaction (Optionnal)</label>
+        <input type="date" name="date_end_reccurency"><br />
+
+        <h3>Target Account</h3>
+        {% for account in accounts %}
+        <input type="radio" id="{{ account.id }}" name="target_account" value="{{ account.id }}">
+        <label for="{{ account.id }}">{{ account.name }}</label><br>
+        {% endfor %}
+        <br />
+
+        <h3>Dest Account</h3>
+        {% for account in accounts %}
+        <input type="radio" id="{{ account.id }}" name="dest_account" value="{{ account.id }}">
+        <label for="{{ account.id }}">{{ account.name }}</label><br>
+        {% endfor %}
+        <br />
+
+        <h3>Categories</h3>
+        {% for category in categories %}
+        <input type="radio" id="{{ category.id }}" name="category" value="{{ category.id }}">
+        <label for="category">{{ category.name }}</label><br>
+        {% endfor %}
+        <br />
+
+
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% endblock %}

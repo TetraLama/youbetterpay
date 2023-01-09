@@ -5,17 +5,14 @@ class CategorySchema(BaseModel):
     name: str = Field(...)
 
     class Config:
-        schema_extra = {"example": {"name": "Internal Transfert"}}
+        schema_extra = {"example": {"name": "Energie"}}
 
 
 class UpdateCategoryModel(BaseModel):
-    description: str = Field(...)
-    ammount: float = Field(...)
-    target_account: str = Field(...)
-    source_account: str = Field(...)
+    name: str = Field(...)
 
     class Config:
-        schema_extra = {"example": {"name": "Internal Transfert"}}
+        schema_extra = {"example": {"name": "Abonnement"}}
 
 
 def ResponseModel(data, message):

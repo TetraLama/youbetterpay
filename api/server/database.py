@@ -130,9 +130,17 @@ def transaction_helper(transaction) -> dict:
     return {
         "id": str(transaction["_id"]),
         "description": transaction["description"],
-        "ammount": transaction["description"],
+        "ammount": transaction["ammount"],
+        "type": transaction["type"],
+        "category": transaction["category"],
         "target_account": transaction["target_account"],
-        "source_account": transaction["source_account"],
+        "dest_account": transaction["dest_account"],
+        "ammount_is_calculated": transaction["ammount_is_calculated"],
+        "is_reccurent": transaction["is_reccurent"],
+        "frequency_every_number": transaction["frequency_every_number"],
+        "freccurency_every_unit": transaction["freccurency_every_unit"],
+        "date_end_reccurency": transaction["date_end_reccurency"],
+        "date": transaction["date"],
     }
 
 

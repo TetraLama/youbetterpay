@@ -47,8 +47,8 @@ async def update_transaction_data(id: str, req: UpdateTransactionModel = Body(..
     updated_transaction = await update_transaction(id, req)
     if updated_transaction:
         return ResponseModel(
-            "Transaction with ID: {} name update is successful".format(id),
-            "Transaction name updated successfully",
+            "Transaction with ID: {} update is successful".format(id),
+            "Transaction updated successfully",
         )
     return ErrorResponseModel(
         "An error occurred",

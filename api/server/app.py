@@ -6,10 +6,12 @@ from server.routes.types import router as TypesRouter
 
 app = FastAPI()
 
-app.include_router(AccountsRouter, tags=["Accounts"], prefix="/v1/accounts")
-app.include_router(TransactionsRouter, tags=["Transactions"], prefix="/v1/transactions")
-app.include_router(CategoriesRouter, tags=["Categories"], prefix="/v1/categories")
-app.include_router(TypesRouter, tags=["Types"], prefix="/v1/types")
+app.include_router(AccountsRouter, tags=["Accounts"], prefix="/api/v1/accounts")
+app.include_router(
+    TransactionsRouter, tags=["Transactions"], prefix="/api/v1/transactions"
+)
+app.include_router(CategoriesRouter, tags=["Categories"], prefix="/api/v1/categories")
+app.include_router(TypesRouter, tags=["Types"], prefix="/api/v1/types")
 
 
 @app.get("/api/v1/healthcheck", tags=["Root"])

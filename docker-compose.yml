@@ -7,7 +7,7 @@ services:
     image: mongo
     env_file:
       - ./.env
-    restart: always
+    restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME}"
       MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD}"
@@ -18,7 +18,7 @@ services:
     image: mongo-express
     env_file:
       - ./.env
-    restart: always
+    restart: unless-stopped
     ports:
       - 8081:8081
     environment:
@@ -33,6 +33,7 @@ services:
         WORKDIR: "${CONTAINER_PARENT_WORKDIR}/web"
     image: youbetterpay-web
     container_name: youbetterpay-web
+    restart: unless-stopped
     ports: 
       - "8080:8080"
     env_file:
@@ -48,6 +49,7 @@ services:
         WORKDIR: "${CONTAINER_PARENT_WORKDIR}/api"
     image: youbetterpay-api
     container_name: youbetterpay-api
+    restart: unless-stopped
     ports: 
       - "8082:8082"
     env_file:
