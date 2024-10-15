@@ -1,0 +1,16 @@
+{% extends 'base.html.j2' %}
+
+{% block header %}
+  <h1>{% block title %}Comptes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('ajouter_compte') }}">Ajouter Compte</a>
+  {% for compte in list_comptes %}
+    <div>
+      <h2>{{ compte.nom }}</h2>
+      <a href="">Modifier</a>
+      <a href="">Supprimer</a>
+    </div>
+  {% endfor %}
+{% endblock %}

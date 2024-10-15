@@ -1,5 +1,6 @@
 Flask
 gunicorn
 Flask-SQLAlchemy
+Flask-Migrate
 debugpy
 psycopg2
