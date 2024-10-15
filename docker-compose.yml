@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    shm_size: 128mb
+    container_name: db
+    env_file:
+      - .env    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: ./code
+    image: youbetterpay
+    volumes:
+      - ./code:/app
+    env_file:
+      - .env
+    ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}"
+      - "5679:5679"
+    command: "python -m debugpy --listen 0.0.0.0:5679 -m flask run --host 0.0.0.0 --port 5000 --debug --no-debugger"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
